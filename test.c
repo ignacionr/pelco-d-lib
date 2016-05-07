@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <termios.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -14,7 +15,7 @@ int
 set_interface_attribs (int fd, int speed, int parity)
 {
         struct termios tty;
-        memset ((void*)&tty, 0, (size_t)sizeof (tty));
+        memset (&tty, 0, sizeof (tty));
         if (tcgetattr (fd, &tty) != 0)
         {
                 error_message ("error %d from tcgetattr", errno);
